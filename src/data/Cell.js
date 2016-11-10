@@ -4,7 +4,7 @@ export default class Cell {
     this.values = values
   }
 
-  isResolved () {
+  get isResolved () {
     return this.values.length === 1
   }
 }
