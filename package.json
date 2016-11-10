@@ -1,0 +1,40 @@
+{
+  "name": "sudoku-tools",
+  "version": "1.0.0",
+  "description": "Algorithms and a basic API for solving sudoku puzzles logically.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter nyan && ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvsm/sudoku-tools.git"
+  },
+  "keywords": [
+    "sudoku",
+    "solver",
+    "puzzle"
+  ],
+  "author": "https://github.com/kvsm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kvsm/sudoku-tools/issues"
+  },
+  "homepage": "https://github.com/kvsm/sudoku-tools#readme",
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "eslint": "^3.9.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-promise": "^3.3.1",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "dependencies": {
+    "ramda": "^0.22.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.spec.js"
+    ]
+  }
+}

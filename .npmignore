@@ -1,0 +1,7 @@
+/src/
+/test/
+/coverage/
+.nyc_output
+.imdone
+.eslintrc.json
+npm-debug.log
