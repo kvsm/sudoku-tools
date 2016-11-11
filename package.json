@@ -4,7 +4,7 @@
   "description": "Algorithms and a basic API for solving sudoku puzzles logically.",
   "main": "index.js",
   "scripts": {
-    "test": "ava --tap | tap-nyan"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
