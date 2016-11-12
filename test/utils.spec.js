@@ -1,7 +1,11 @@
 import test from 'ava'
 import {getResolvedCells, getResolvedCount} from '../src/utils'
-import {validIncompletePuzzle} from './fixtures.js'
+import {validIncompletePuzzle, validIncompleteRegion} from './fixtures.js'
 
-test('getResolvedCount(state)', t => {
+test('getResolvedCells', t => {
+  t.is(getResolvedCells(validIncompleteRegion).length, 2, 'returns only cells which are resolved')
+})
+
+test('getResolvedCount', t => {
   t.is(getResolvedCount(validIncompletePuzzle), 80, 'returns the correct number of resolved cells')
 })

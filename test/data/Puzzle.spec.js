@@ -2,7 +2,7 @@ import test from 'ava'
 import {wrongLengthInput, notNumericInput, invalidStateInput, invalidPuzzle, validCompletePuzzle, validIncompletePuzzle} from '../fixtures'
 import Puzzle from '../../src/data/Puzzle'
 
-test('parse(str)', t => {
+test('parse', t => {
   t.throws(() => {
     Puzzle.parse()
   }, 'Invalid state: No state specified',
