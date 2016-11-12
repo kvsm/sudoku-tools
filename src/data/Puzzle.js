@@ -1,6 +1,6 @@
 import R from 'ramda'
 import Cell from './Cell'
-import {getResolvedCells} from '../utils'
+import {getResolvedCells, getRegionsFromState} from '../utils'
 
 class Puzzle {
   constructor (state) {
@@ -15,9 +15,14 @@ class Puzzle {
   }
 
   get isValid () {
-    return true
+    const regions = getRegionsFromState(this.currentState)
+    return R.all(validateRegion, regions)
   }
+}
 
+const validateRegion = region => {
+  const resolvedCells = getResolvedCells(region)
+  return resolvedCells.length === R.uniq(R.map(R.compose(R.head, R.prop('values')), resolvedCells)).length
 }
 
 const parse = input => {
