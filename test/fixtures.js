@@ -9,3 +9,9 @@ invalidPuzzle.currentState[1].values = [1]
 export const validIncompletePuzzle = Puzzle.parse(validInput)
 export const validCompletePuzzle = Puzzle.parse(validInput)
 validCompletePuzzle.currentState[80].values = [8]
+export const validIncompleteRegion = [
+  { values: [1] },
+  { values: [2] },
+  { values: [8, 9] },
+  { values: [8, 9] }
+]
