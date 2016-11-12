@@ -5,19 +5,19 @@ import Puzzle from '../../src/data/Puzzle'
 test('parse', t => {
   t.throws(() => {
     Puzzle.parse()
-  }, 'Invalid state: No state specified',
+  }, 'Parse Error: No state specified',
     'throws Error when no string is specified')
   t.throws(() => {
     Puzzle.parse(wrongLengthInput)
-  }, 'Invalid state: only standard 9x9 sudokus are supported, so state should be 81 characters long but was: 3',
+  }, 'Parse Error: only standard 9x9 sudokus are supported, so state should be 81 characters long but was: 3',
     'throws Error when state string is wrong length')
   t.throws(() => {
     Puzzle.parse(notNumericInput)
-  }, 'Invalid state: state should only contain digits 0-9',
+  }, 'Parse Error: state should only contain digits 0-9',
     'throws Error when state string is not numeric')
   t.throws(() => {
     Puzzle.parse(invalidStateInput)
-  }, 'Invalid state: breaks rules of sudoku',
+  }, 'Parse Error: breaks rules of sudoku',
     'throws Error when state string is not a valid sudoku state')
 })
 
