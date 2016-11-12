@@ -1,7 +1,7 @@
 import R from 'ramda'
 
 export const getResolvedCells = R.filter(cell => cell.values.length === 1)
-export const getResolvedCount = R.pipe(R.prop(''), getResolvedCells, R.length)
+export const getResolvedCount = R.pipe(R.prop('currentState'), getResolvedCells, R.length)
 
 const rowIndexes = [
   [0, 1, 2, 3, 4, 5, 6, 7, 8],
