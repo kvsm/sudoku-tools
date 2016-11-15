@@ -1,16 +1,20 @@
+import R from 'ramda'
 import NakedSingle from './algorithms/nakedSingle'
-import {getRowsFromState, getColumnsFromState, getBlocksFromState} from './utils'
+import {getDifferenceOfStates} from './utils'
 
 const algorithms = [
   NakedSingle
 ]
 
 const runAlgorithms = puzzle => {
-  const rows = getRowsFromState(puzzle.state)
-  const columns = getColumnsFromState(puzzle.state)
-  const blocks = getBlocksFromState(puzzle.state)
-  const solveOrder = puzzle.solveOrder
-
+  const newPuzzle = R.clone(puzzle)
+  for (let algorithm of algorithms) {
+    const startState = R.clone(newPuzzle.currentState)
+    const endState = algorithm.run(newPuzzle.currentState)
+    const solvedCells = getDifferenceOfStates(startState, endState)
+    newPuzzle.currentState = endState
+    newPuzzle.solveOrder = R.concat(newPuzzle.solveOrder, solvedCells)
+  }
   return newPuzzle
 }
 
@@ -22,8 +26,9 @@ const solve = puzzle => {
     const err = new Error('Solve Error: Unable to solve with current algorithms')
     err.puzzle = newPuzzle
     throw err
+  } else {
+    return newPuzzle.isComplete ? newPuzzle : solve(newPuzzle)
   }
-  return newPuzzle.isComplete ? newPuzzle : solve(newPuzzle)
 }
 
 export default {

@@ -45,3 +45,21 @@ export const getRegionsFromState = getRegions(regionIndexes)
 export const getRowsFromState = getRegions(rowIndexes)
 export const getColumnsFromState = getRegions(columnIndexes)
 export const getBlocksFromState = getRegions(blockIndexes)
+export const regionTypes = [
+  getRowsFromState,
+  getColumnsFromState,
+  getBlocksFromState
+]
+export const getStateFromRegions = regions => {
+  const state = []
+  const cells = R.flatten(regions)
+  for (let cell of cells) {
+    state[cell.index] = cell
+  }
+  return state
+}
+
+export const validateRegion = region => {
+  const resolvedCells = getResolvedCells(region)
+  return resolvedCells.length === R.uniq(R.map(R.compose(R.head, R.prop('values')), resolvedCells)).length
+}

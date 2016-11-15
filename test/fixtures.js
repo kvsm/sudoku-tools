@@ -1,5 +1,4 @@
 import Puzzle from '../src/data/Puzzle'
-import Cell from '../src/data/Cell'
 
 export const wrongLengthInput = '123'
 export const notNumericInput = '12345678912345678912345678912345678912345678912345678912345678912345678912345678a'
@@ -15,9 +14,4 @@ export const validIncompleteRegion = [
   { values: [2] },
   { values: [8, 9] },
   { values: [8, 9] }
-]
-export const nakedSingleRegion = [
-  new Cell(0, [1, 2, 3]),
-  new Cell(1, [1, 2]),
-  new Cell(2, [1])
 ]
