@@ -32,4 +32,6 @@ test('run', t => {
   const result = nakedSingle.run(validIncompletePuzzle.currentState)
   t.is(result[80].values.length, 1, 'last cell has 1 value')
   t.is(result[80].values[0], 8, 'last cell value is 8')
+  t.is(result[79].values.length, 1, 'second last cell has 1 value')
+  t.is(result[80].values[0], 8, 'second last cell value is 7')
 })

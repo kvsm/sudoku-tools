@@ -5,19 +5,16 @@ import {getResolvedCells, regionTypes, getStateFromRegions} from '../utils'
 const nakedSingle = region => {
   const resolvedValues =
     R.reduce((acc, cell) => R.append(R.head(cell.values), acc), [], getResolvedCells(region))
-  const removeResolvedValues = R.filter(val => !R.contains(val, resolvedValues))
-  return region.map(cell => cell.isResolved ? cell : new Cell(cell.index, removeResolvedValues(cell.values)))
+  return region.map(cell => cell.isResolved ? Cell.clone(cell) : new Cell(cell.index, R.without(resolvedValues, cell.values)))
 }
 
 const run = state => {
-  let newRegions
-  let newState = R.clone(state)
   for (let fetchRegions of regionTypes) {
-    const regions = fetchRegions(newState)
-    newRegions = regions.map(region => nakedSingle(region))
-    newState = getStateFromRegions(newRegions)
+    const regions = fetchRegions(state)
+    const newRegions = regions.map(region => nakedSingle(region))
+    state = getStateFromRegions(newRegions)
   }
-  return newState
+  return state
 }
 
 export default {
