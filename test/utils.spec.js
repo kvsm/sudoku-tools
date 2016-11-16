@@ -1,6 +1,6 @@
 import test from 'ava'
 import * as Utils from '../src/utils'
-import {validIncompletePuzzle, validIncompleteRegion} from './fixtures.js'
+import {validCompletePuzzle, validIncompletePuzzle, validIncompleteRegion} from './fixtures.js'
 
 const invalidRegion = [
   { values: [1] },
@@ -19,7 +19,7 @@ test('getResolvedCells', t => {
 })
 
 test('getResolvedCount', t => {
-  t.is(Utils.getResolvedCount(validIncompletePuzzle), 80, 'returns the correct number of resolved cells')
+  t.is(Utils.getResolvedCount(validIncompletePuzzle), 79, 'returns the correct number of resolved cells')
 })
 
 test('getStateFromRegions', t => {
@@ -33,4 +33,10 @@ test('getStateFromRegions', t => {
 test('validateRegion', t => {
   t.true(Utils.validateRegion(validIncompleteRegion), 'valid region returns true')
   t.false(Utils.validateRegion(invalidRegion), 'invalid region returns false')
+})
+
+test('getDifferenceOfStates', t => {
+  const start = validIncompletePuzzle.currentState
+  const end = validCompletePuzzle.currentState
+  t.deepEqual(Utils.getDifferenceOfStates(start, end), [79, 80], 'it returns the list of indexes in the state which are resolved in end but not start')
 })

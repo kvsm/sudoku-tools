@@ -2,6 +2,12 @@ import R from 'ramda'
 
 export const getResolvedCells = R.filter(cell => cell.values.length === 1)
 export const getResolvedCount = R.pipe(R.prop('currentState'), getResolvedCells, R.length)
+export const getDifferenceOfStates = (start, end) => {
+  const newResolvedCells = end.filter((cell, idx) => {
+    return cell.isResolved && !start[idx].isResolved
+  })
+  return newResolvedCells.map(cell => cell.index)
+}
 
 const rowIndexes = [
   [0, 1, 2, 3, 4, 5, 6, 7, 8],
