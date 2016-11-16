@@ -4,7 +4,8 @@
   "description": "Algorithms and a basic API for solving sudoku puzzles logically.",
   "main": "index.js",
   "scripts": {
-    "test": "ava --verbose"
+    "test": "ava --verbose",
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
