@@ -22,7 +22,7 @@ export const funcs = {
   runAlgorithms: runAlgorithms
 }
 
-const solve = puzzle => {
+export const solve = puzzle => {
   return new Promise((resolve, reject) => {
     const before = JSON.stringify(puzzle)
     const newPuzzle = funcs.runAlgorithms(puzzle)
@@ -37,8 +37,4 @@ const solve = puzzle => {
       }
     }
   })
-}
-
-export default {
-  solve: solve
 }
