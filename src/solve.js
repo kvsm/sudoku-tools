@@ -18,17 +18,25 @@ const runAlgorithms = puzzle => {
   return newPuzzle
 }
 
+export const funcs = {
+  runAlgorithms: runAlgorithms
+}
+
 const solve = puzzle => {
-  const before = JSON.stringify(puzzle)
-  const newPuzzle = runAlgorithms(puzzle)
-  const after = JSON.stringify(newPuzzle)
-  if (before === after) {
-    const err = new Error('Solve Error: Unable to solve with current algorithms')
-    err.puzzle = newPuzzle
-    throw err
-  } else {
-    return newPuzzle.isComplete ? newPuzzle : solve(newPuzzle)
-  }
+  return new Promise((resolve, reject) => {
+    const before = JSON.stringify(puzzle)
+    const newPuzzle = funcs.runAlgorithms(puzzle)
+    const after = JSON.stringify(newPuzzle)
+    if (before === after) {
+      reject(newPuzzle)
+    } else {
+      if (newPuzzle.isComplete) {
+        resolve(newPuzzle)
+      } else {
+        solve(newPuzzle)
+      }
+    }
+  })
 }
 
 export default {
