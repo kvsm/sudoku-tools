@@ -34,7 +34,8 @@
     "eslint-plugin-promise": "^3.3.1",
     "eslint-plugin-standard": "^2.0.1",
     "istanbul-reports": "^1.0.0",
-    "nyc": "^9.0.1"
+    "nyc": "^9.0.1",
+    "sinon": "^1.17.6"
   },
   "dependencies": {
     "ramda": "^0.22.1"
