@@ -1,4 +1,5 @@
 import R from 'ramda'
+import {Puzzle} from './data/Puzzle'
 import NakedSingle from './algorithms/nakedSingle'
 import {getDifferenceOfStates} from './utils'
 
@@ -7,13 +8,13 @@ const algorithms = [
 ]
 
 const runAlgorithms = puzzle => {
-  const newPuzzle = R.clone(puzzle)
+  const newPuzzle = Puzzle.clone(puzzle)
   for (let algorithm of algorithms) {
-    const startState = R.clone(newPuzzle.currentState)
+    const startState = puzzle.currentState
     const endState = algorithm.run(newPuzzle.currentState)
-    const solvedCells = getDifferenceOfStates(startState, endState)
+    const solvedCellIndexes = getDifferenceOfStates(startState, endState)
     newPuzzle.currentState = endState
-    newPuzzle.solveOrder = R.concat(newPuzzle.solveOrder, solvedCells)
+    newPuzzle.solveOrder = R.concat(newPuzzle.solveOrder, solvedCellIndexes)
   }
   return newPuzzle
 }
@@ -24,16 +25,15 @@ export const funcs = {
 
 export const solve = puzzle => {
   return new Promise((resolve, reject) => {
-    const before = JSON.stringify(puzzle)
-    const newPuzzle = funcs.runAlgorithms(puzzle)
-    const after = JSON.stringify(newPuzzle)
-    if (before === after) {
-      reject(newPuzzle)
-    } else {
+    let newPuzzle = puzzle
+    while (true) {
+      const before = JSON.stringify(newPuzzle)
+      newPuzzle = funcs.runAlgorithms(newPuzzle)
+      const after = JSON.stringify(newPuzzle)
       if (newPuzzle.isComplete) {
-        resolve(newPuzzle)
-      } else {
-        solve(newPuzzle)
+        return resolve(newPuzzle)
+      } else if (before === after) {
+        return reject(newPuzzle)
       }
     }
   })

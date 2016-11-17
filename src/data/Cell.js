@@ -1,3 +1,5 @@
+import R from 'ramda'
+
 export default class Cell {
   static clone (cell) {
     if (cell instanceof Cell) {
@@ -9,7 +11,7 @@ export default class Cell {
 
   constructor (index, values) {
     this.index = index
-    this.values = values
+    this.values = R.clone(values)
   }
 
   get isResolved () {

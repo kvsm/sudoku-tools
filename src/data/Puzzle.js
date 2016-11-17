@@ -1,11 +1,22 @@
 import R from 'ramda'
 import Cell from './Cell'
-import {getResolvedCells, getRegionsFromState, validateRegion} from '../utils'
+import {getResolvedCells, getRegionsFromState, validateRegion, cloneState} from '../utils'
 
-class Puzzle {
+export class Puzzle {
+  static clone (puzzle) {
+    if (puzzle instanceof Puzzle) {
+      const clone = new Puzzle(puzzle.currentState)
+      clone.initialState = puzzle.initialState
+      clone.solveOrder = R.clone(puzzle.solveOrder)
+      return clone
+    } else {
+      throw new Error('Puzzle.clone(arg): arg is not an instance of Puzzle')
+    }
+  }
+
   constructor (state) {
     this.initialState = state
-    this.currentState = state
+    this.currentState = cloneState(state)
     this.solveOrder = []
   }
 

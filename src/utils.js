@@ -1,4 +1,5 @@
 import R from 'ramda'
+import Cell from './data/Cell'
 
 export const getResolvedCells = R.filter(cell => cell.values.length === 1)
 export const getResolvedCount = R.pipe(R.prop('currentState'), getResolvedCells, R.length)
@@ -7,6 +8,13 @@ export const getDifferenceOfStates = (start, end) => {
     return cell.isResolved && !start[idx].isResolved
   })
   return newResolvedCells.map(cell => cell.index)
+}
+export const cloneState = state => {
+  let clone = []
+  for (let cell of state) {
+    clone[cell.index] = Cell.clone(cell)
+  }
+  return clone
 }
 
 const rowIndexes = [
