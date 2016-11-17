@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose",
-    "coverage": "nyc --all --reporter=html npm test && xdg-open ./coverage/index.html",
-    "build": "babel src --out-dir lib"
+    "coverage": "nyc --cache --all --reporter=html npm test && xdg-open ./coverage/index.html",
+    "build": "babel --presets babel-preset-es2015 src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-preset-es2015": "^6.18.0",
+    "babel-preset-node6": "^11.0.0",
     "eslint": "^3.9.1",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-import": "^2.2.0",
@@ -42,7 +43,7 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "node6"
     ],
     "sourceMaps": "inline"
   },
