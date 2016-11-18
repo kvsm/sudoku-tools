@@ -30,3 +30,12 @@ test('isValid', t => {
   t.true(validCompletePuzzle.isValid, 'valid puzzle is valid')
   t.false(invalidPuzzle.isValid, 'invalid puzzle is not valid')
 })
+
+test('clone', t => {
+  const clone = Puzzle.clone(validCompletePuzzle)
+  t.true(clone instanceof Puzzle.puzzle, 'clone is an instance of Puzzle')
+  t.false(clone === validCompletePuzzle, 'clone is not the same instance as original')
+  t.throws(() => {
+    Puzzle.clone('foobar')
+  })
+})

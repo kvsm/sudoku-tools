@@ -1,5 +1,5 @@
 import R from 'ramda'
-import {Puzzle} from './data/Puzzle'
+import Puzzle from './data/Puzzle'
 import NakedSingle from './algorithms/nakedSingle'
 import {getDifferenceOfStates} from './utils'
 

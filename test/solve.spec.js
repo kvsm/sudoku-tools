@@ -1,21 +1,12 @@
 import test from 'ava'
 import sinon from 'sinon'
 import {solve, funcs} from '../src/solve'
-import {validIncompletePuzzle, validCompletePuzzle} from './fixtures'
+import {validIncompletePuzzle, validCompletePuzzle, emptyPuzzle} from './fixtures'
 
 test.afterEach.always(t => {
   if (funcs.runAlgorithms.restore) {
     funcs.runAlgorithms.restore()
   }
-})
-
-test.serial('solve - run to resolved', t => {
-  return solve(validIncompletePuzzle).then(result => {
-    t.pass('promise is resolved when runAlgorithms returns complete puzzle')
-  }).catch(result => {
-    console.log(result)
-    t.fail('promise is resolved when runAlgorithms returns complete puzzle')
-  })
 })
 
 test.serial('solve - rejected', t => {
@@ -33,5 +24,21 @@ test.serial('solve - resolved', t => {
     t.pass('promise is resolved when runAlgorithms returns complete puzzle')
   }).catch(result => {
     t.fail('promise is resolved when runAlgorithms returns complete puzzle')
+  })
+})
+
+test.serial('solve - run to resolved', t => {
+  return solve(validIncompletePuzzle).then(result => {
+    t.pass('promise is resolved when runAlgorithms returns complete puzzle')
+  }).catch(result => {
+    t.fail('promise is resolved when runAlgorithms returns complete puzzle')
+  })
+})
+
+test.serial('solve - run to rejected', t => {
+  return solve(emptyPuzzle).then(result => {
+    t.fail('promise is resolved when runAlgorithms returns complete puzzle')
+  }).catch(result => {
+    t.pass('promise is resolved when runAlgorithms returns complete puzzle')
   })
 })
