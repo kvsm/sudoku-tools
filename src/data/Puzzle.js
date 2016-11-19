@@ -2,7 +2,7 @@ import R from 'ramda'
 import Cell from './Cell'
 import {getResolvedCells, getRegionsFromState, validateRegion, cloneState} from '../utils'
 
-export default class Puzzle { // TODO:0 refactor these exports +feature id:1
+export default class Puzzle {
   static clone (puzzle) {
     if (puzzle instanceof Puzzle) {
       const clone = new Puzzle(puzzle.currentState)
