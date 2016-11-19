@@ -2,7 +2,7 @@ import R from 'ramda'
 import Cell from './Cell'
 import {getResolvedCells, getRegionsFromState, validateRegion, cloneState} from '../utils'
 
-class Puzzle { // TODO refactor these exports
+export default class Puzzle { // TODO:0 refactor these exports +feature id:1
   static clone (puzzle) {
     if (puzzle instanceof Puzzle) {
       const clone = new Puzzle(puzzle.currentState)
@@ -11,6 +11,27 @@ class Puzzle { // TODO refactor these exports
       return clone
     } else {
       throw new Error('Puzzle.clone(arg): arg is not an instance of Puzzle')
+    }
+  }
+
+  static parse (input) {
+    const str = String(input)
+    if (input === undefined) {
+      throw new Error('Parse Error: No state specified')
+    } else if (str.length !== 81) {
+      throw new Error('Parse Error: only standard 9x9 sudokus are supported, so state should be 81 characters long but was: ' + str.length)
+    } else if (!/^[0-9]+$/.test(str)) {
+      throw new Error('Parse Error: state should only contain digits 0-9')
+    } else {
+      const state = str.split('').map((x, i) => {
+        return x === '0' ? new Cell(i, [1, 2, 3, 4, 5, 6, 7, 8, 9]) : new Cell(i, [Number(x)])
+      })
+      const puzzle = new Puzzle(state)
+      if (!puzzle.isValid) {
+        throw new Error('Parse Error: breaks rules of sudoku')
+      } else {
+        return puzzle
+      }
     }
   }
 
@@ -29,31 +50,4 @@ class Puzzle { // TODO refactor these exports
     const regions = getRegionsFromState(this.currentState)
     return R.all(validateRegion, regions)
   }
-}
-
-const parse = input => {
-  const str = String(input)
-  if (input === undefined) {
-    throw new Error('Parse Error: No state specified')
-  } else if (str.length !== 81) {
-    throw new Error('Parse Error: only standard 9x9 sudokus are supported, so state should be 81 characters long but was: ' + str.length)
-  } else if (!/^[0-9]+$/.test(str)) {
-    throw new Error('Parse Error: state should only contain digits 0-9')
-  } else {
-    const state = str.split('').map((x, i) => {
-      return x === '0' ? new Cell(i, [1, 2, 3, 4, 5, 6, 7, 8, 9]) : new Cell(i, [Number(x)])
-    })
-    const puzzle = new Puzzle(state)
-    if (!puzzle.isValid) {
-      throw new Error('Parse Error: breaks rules of sudoku')
-    } else {
-      return puzzle
-    }
-  }
-}
-
-export default {
-  parse: parse,
-  clone: Puzzle.clone,
-  puzzle: Puzzle
 }

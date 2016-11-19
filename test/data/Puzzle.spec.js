@@ -33,7 +33,7 @@ test('isValid', t => {
 
 test('clone', t => {
   const clone = Puzzle.clone(validCompletePuzzle)
-  t.true(clone instanceof Puzzle.puzzle, 'clone is an instance of Puzzle')
+  t.true(clone instanceof Puzzle, 'clone is an instance of Puzzle')
   t.false(clone === validCompletePuzzle, 'clone is not the same instance as original')
   t.throws(() => {
     Puzzle.clone('foobar')
