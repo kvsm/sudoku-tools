@@ -2,7 +2,7 @@
   "name": "sudoku-tools",
   "version": "1.0.0",
   "description": "Algorithms and a basic API for solving sudoku puzzles logically.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "ava --verbose",
     "coverage": "nyc --cache --all --reporter=html npm test && xdg-open ./coverage/index.html",
