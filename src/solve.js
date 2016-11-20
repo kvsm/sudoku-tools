@@ -1,10 +1,12 @@
 import R from 'ramda'
 import Puzzle from './data/Puzzle'
 import NakedSingle from './algorithms/nakedSingle'
+import HiddenSingle from './algorithms/hiddenSingle'
 import {getDifferenceOfStates} from './utils'
 
 const algorithms = [
-  NakedSingle
+  NakedSingle,
+  HiddenSingle
 ]
 
 const runAlgorithms = puzzle => {
